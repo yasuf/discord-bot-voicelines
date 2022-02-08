@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const config = require('./config.json');
+const config = require('../config.json');
 const { join } = require('path');
 const {
   createAudioPlayer,
@@ -7,12 +7,16 @@ const {
   joinVoiceChannel,
   entersState,
   StreamType,
-  VoiceConnectionStatus
+  VoiceConnectionStatus,
+  AudioPlayerStatus,
 } = require('@discordjs/voice');
 
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_VOICE_STATES"] });
 const player = createAudioPlayer();
 const resource = createAudioResource(join(__dirname, 'sounds', 'lakadmatatag.mp3'));
+const Voice = require('./Voice');
+
+const voiceClient = new Voice();
 
 const PREFIX = "!";
 
@@ -43,22 +47,14 @@ client.on("messageCreate", async function(message) {
   if (command === "ping") {
     const timeTaken = Date.now() - message.createdTimestamp;
     message.reply(`Pong! This message had a latency of ${timeTaken}ms.`);
-  } else if (command === "sum") {
-    const numArgs = args.map(x => parseFloat(x));
-    const sum = numArgs.reduce((acc, el) => acc + el, 0);
-
-    message.reply(`The sum of all arguments provided is ${sum}!`);
   } else if (command === "lakadmatatag") {
-    console.log(resource);
     player.play(resource, { inputType: StreamType.Arbitrary });
-
+    return entersState(player, AudioPlayerStatus.Playing, 5e3)
     message.reply(`Playing Lakad Matatag`);
   } else if (command === "join") {
     const channel = message.member.voice.channel;
     const connection = await connectToChannel(channel);
     connection.subscribe(player);
-  } else if (command === "kick") {
-
   }
 });
 
