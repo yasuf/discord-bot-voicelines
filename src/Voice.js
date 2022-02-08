@@ -11,26 +11,32 @@ const {
 class Voice {
   constructor() {
     this.player = createAudioPlayer();
-    this.lakadMatatag = createAudioResource(join(__dirname, 'sounds', 'lakadmatatag.mp3'));
+    this.connection = null;
   }
 
-  playEffect() {
-    this.player.play(this.lakadMatatag, { inputType: StreamType.Arbitrary });
-    return entersState(connection, VoiceConnectionStatus.Ready, 30e3);
+  playPathEffect(args) {
+    const file = args.pop();
+    const folders = args;
+    const resource = createAudioResource(join(__dirname, 'sounds', ...folders, `${file}.mp3`));
+    this.player.play(resource, { inputType: StreamType.Arbitrary });
+  }
+
+  stopEffect() {
+    this.player.stop();
   }
 
   async connectToChannel(channel) {
-    const connection = joinVoiceChannel({
+    this.connection = joinVoiceChannel({
       channelId: channel.id,
       guildId: channel.guild.id,
       adapterCreator: channel.guild.voiceAdapterCreator,
     });
 
     try {
-      await entersState(connection, VoiceConnectionStatus.Ready, 30e3);
-      return connection;
+      await entersState(this.connection, VoiceConnectionStatus.Ready, 30e3);
+      return this.connection;
     } catch (error) {
-      connection.destroy();
+      this.connection.destroy();
       throw error;
     }
   }

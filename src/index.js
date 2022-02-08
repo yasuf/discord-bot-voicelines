@@ -7,6 +7,7 @@ const Voice = require('./Voice');
 const CommandParser = require('./CommandParser');
 
 const voiceClient = new Voice();
+let connection = null;
 
 client.on("messageCreate", async function(message) {
   if (message.author.bot) return;
@@ -18,14 +19,15 @@ client.on("messageCreate", async function(message) {
   if (command === "ping") {
     const timeTaken = Date.now() - message.createdTimestamp;
     message.reply(`Pong! This message had a latency of ${timeTaken}ms.`);
-  } else if (command === "lakadmatatag") {
-    voiceClient.playEffect();
-    message.reply(`Playing Lakad Matatag`);
   } else if (command === "join") {
-    console.log('trying to join');
     const channel = message.member.voice.channel;
-    const connection = await voiceClient.connectToChannel(channel);
-    connection.subscribe(player);
+    connection = await voiceClient.connectToChannel(channel);
+    connection.subscribe(voiceClient.player);
+  } else if (command === "stop") {
+    voiceClient.stopEffect();
+    message.reply(`Stopping Voice message`);
+  } else if (command === "sfx") {
+    voiceClient.playPathEffect(args);
   }
 });
 
