@@ -22,7 +22,6 @@ client.on("messageCreate", async function(message) {
   } else if (command === "join") {
     const channel = message.member.voice.channel;
     if (!channel) { return false };
-
     connection = await voiceClient.connectToChannel(channel);
     connection.subscribe(voiceClient.player);
   } else if (command === "stop") {
@@ -31,6 +30,12 @@ client.on("messageCreate", async function(message) {
   } else if (command === "sfx") {
     voiceClient.playPathEffect(args);
     message.reply(`Playing sound effect ${args}`);
+  } else if (command === "list") {
+    message.reply(`List of commands available:`);
+    const soundsList = voiceClient.availableSounds();
+    soundsList.forEach(sound => {
+      message.reply(sound);
+    });
   }
 });
 

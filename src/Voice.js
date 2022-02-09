@@ -1,3 +1,4 @@
+const { readdir } = require('fs/promises');
 const { join } = require('path');
 const {
   createAudioPlayer,
@@ -39,6 +40,11 @@ class Voice {
       this.connection.destroy();
       throw error;
     }
+  }
+
+  async availableSounds() {
+    const files = await readdir('./sounds');
+    return files;
   }
 }
 
