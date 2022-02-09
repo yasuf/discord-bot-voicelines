@@ -43,7 +43,7 @@ class Voice {
   }
 
   async availableSounds() {
-    const files = await readdir('./sounds');
+    const files = await readdir(join(__dirname, 'sounds'));
     return files;
   }
 }

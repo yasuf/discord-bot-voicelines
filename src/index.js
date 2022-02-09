@@ -32,9 +32,10 @@ client.on("messageCreate", async function(message) {
   } else if (command === "list") {
     message.reply(`List of commands available:`);
     const soundsList = await voiceClient.availableSounds();
-    soundsList.forEach(sound => {
-      message.reply(sound);
-    });
+    const list = soundsList.reduce((acc, sound) => {
+      return acc + '\n' + sound.replace('.mp3', '');
+    }, '');
+    message.reply(list);
   }
 });
 
