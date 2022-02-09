@@ -26,6 +26,10 @@ class Voice {
   }
 
   async connectToChannel(channel) {
+    if (!channel) {
+      return false;
+    }
+
     this.connection = joinVoiceChannel({
       channelId: channel.id,
       guildId: channel.guild.id,
