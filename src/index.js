@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const config = require('../config.json');
 const { join } = require('path');
 
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_VOICE_STATES"] });
@@ -32,7 +31,7 @@ client.on("messageCreate", async function(message) {
     message.reply(`Playing sound effect ${args}`);
   } else if (command === "list") {
     message.reply(`List of commands available:`);
-    const soundsList = voiceClient.availableSounds();
+    const soundsList = await voiceClient.availableSounds();
     soundsList.forEach(sound => {
       message.reply(sound);
     });
