@@ -21,6 +21,8 @@ client.on("messageCreate", async function(message) {
     message.reply(`Pong! This message had a latency of ${timeTaken}ms.`);
   } else if (command === "join") {
     const channel = message.member.voice.channel;
+    if (!channel) { return false };
+
     connection = await voiceClient.connectToChannel(channel);
     connection.subscribe(voiceClient.player);
   } else if (command === "stop") {
