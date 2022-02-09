@@ -1,6 +1,6 @@
 class CommandParser {
 
-  static PREFIX = "!";
+  static PREFIX = "/";
 
   constructor() {}
 

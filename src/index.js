@@ -28,8 +28,11 @@ client.on("messageCreate", async function(message) {
     message.reply(`Stopping Voice message`);
   } else if (command === "sfx") {
     voiceClient.playPathEffect(args);
+    message.reply(`Playing sound effect ${args}`);
   }
 });
 
-client.login(config.BOT_TOKEN);
+const token = process.env['BOT_TOKEN']
+
+client.login(token);
 console.log("Sucessfully logged in to the Discord Lines bot")
