@@ -13,6 +13,7 @@ class Voice {
   constructor() {
     this.player = createAudioPlayer();
     this.connection = null;
+    this.channel = null;
   }
 
   playPathEffect(args) {
