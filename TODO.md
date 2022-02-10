@@ -1,6 +1,10 @@
 TODO:
 * Deploy to heroku DONE
-* Fix bug where voice lines are reproduced in other servers
+* Fix bug where voice lines are reproduced in other servers.
+* What's the easiest way to let people manage their sounds?
+  * Add a database to the project.
+  * Switch to hosting files in S3.
+  * Build some UI to manage sound list.
 
 Solutions:
 1. Check whether the message was sent in the same channel as the one we'll be playing the sound in
