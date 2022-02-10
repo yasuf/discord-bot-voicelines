@@ -11,9 +11,13 @@
   "license": "ISC",
   "dependencies": {
     "@discordjs/voice": "^0.8.0",
+    "@prisma/client": "^3.9.1",
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
     "libsodium-wrappers": "^0.7.9",
     "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "prisma": "^3.9.1"
   }
 }
