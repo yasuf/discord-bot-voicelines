@@ -7,8 +7,8 @@ TODO:
   * Build some UI to manage sound list.
 
 Solutions:
-1. Check whether the message was sent in the same channel as the one we'll be playing the sound in
-2. If they're the same, play the sound, otherwise return
+1. Check whether the message was sent in the same channel as the one we'll be playing the sound in.
+2. If they're the same, play the sound, otherwise return.
 
 * Test Buildpack
 
