@@ -38,7 +38,7 @@ client.on("messageCreate", async function(message) {
   } else if (command === "stop") {
     voiceClient.stopEffect();
     message.reply(`Stopping Voice message`);
-  } else if (command === "sfx") {
+  } else if (command === "s") {
     const channel = message.member.voice.channel;
     joinChannel(channel, voiceClient);
     voiceClient.playPathEffect(args);
