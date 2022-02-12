@@ -1,0 +1,16 @@
+datasource db {
+  url      = env("DATABASE_URL")
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Sound {
+  id                Int      @id @default(autoincrement())
+  createdAt         DateTime @default(now())
+  name              String?
+  url               String   @unique
+  discordGuildId    Int
+}
