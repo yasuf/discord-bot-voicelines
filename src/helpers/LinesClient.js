@@ -11,6 +11,10 @@ const getLines = () => {
   return client.get('/lines');
 }
 
+const getLineById = (id) => {
+  return client.get(`/lines/${id}`);
+}
+
 module.exports = {
   client,
   getLines

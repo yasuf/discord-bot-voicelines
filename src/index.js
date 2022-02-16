@@ -42,10 +42,12 @@ client.on("messageCreate", async function(message) {
     voiceClient.stopEffect();
     message.reply(`Stopping Voice message`);
   } else if (command === "s") {
-    const channel = message.member.voice.channel;
-    joinChannel(channel, voiceClient);
-    voiceClient.playPathEffect(args);
-    message.reply(`Playing sound effect ${args}`);
+    const file = args.pop();
+    const line = await getLineByName(file);
+    // const channel = message.member.voice.channel;
+    // joinChannel(channel, voiceClient);
+    // voiceClient.playPathEffect(args);
+    // message.reply(`Playing sound effect ${args}`);
   } else if (command === "list") {
     const linesPayload = await getLines();
     const lines = linesPayload.data.data
