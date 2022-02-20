@@ -23,6 +23,16 @@ class Voice {
     this.player.play(resource, { inputType: StreamType.Arbitrary });
   }
 
+  play(url) {
+    try {
+      const resource = createAudioResource(url);
+      this.player.play(resource, { inputType: StreamType.Arbitrary });
+    } catch (e) {
+      console.error(`Could not play file in url ${url}, full error:`);
+      console.error(e);
+    }
+  }
+
   stopEffect() {
     this.player.stop();
   }

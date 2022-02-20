@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const client = axios.create({
-  baseURL: 'https://lines-api.herokuapp.com/api',
+  baseURL: `${process.env.LINES_API_URL}/api`,
   headers: {
     'Authorization': `Bearer ${process.env.LINES_API_TOKEN}`
   }
@@ -11,11 +11,12 @@ const getLines = () => {
   return client.get('/lines');
 }
 
-const getLineById = (id) => {
-  return client.get(`/lines/${id}`);
+const getLineByName = (name) => {
+  return client.get(`/lines/search?query=${name}`);
 }
 
 module.exports = {
   client,
-  getLines
+  getLines,
+  getLineByName,
 };

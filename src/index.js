@@ -5,7 +5,7 @@ require('dotenv').config();
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_VOICE_STATES"] });
 const Voice = require('./Voice');
 const CommandParser = require('./CommandParser');
-const { getLines } = require('./helpers/LinesClient');
+const { getLines, getLineByName } = require('./helpers/LinesClient');
 
 const voiceClients = {};
 
@@ -40,14 +40,23 @@ client.on("messageCreate", async function(message) {
     joinChannel(channel, voiceClient);
   } else if (command === "stop") {
     voiceClient.stopEffect();
-    message.reply(`Stopping Voice message`);
+    message.reply(`Stopping voice line`);
   } else if (command === "s") {
     const file = args.pop();
-    const line = await getLineByName(file);
-    // const channel = message.member.voice.channel;
-    // joinChannel(channel, voiceClient);
-    // voiceClient.playPathEffect(args);
-    // message.reply(`Playing sound effect ${args}`);
+    const channel = message.member.voice.channel;
+    joinChannel(channel, voiceClient);
+
+    try {
+      const line = await getLineByName(file);
+
+      const fileUrl = `${process.env.LINES_API_URL}${line.data.audioFile.url}`;
+      voiceClient.play(fileUrl);
+
+      message.reply(`Playing voice line: ${line.data.name}`);
+    } catch (e) {
+      message.reply(`Voice line does not exist: ${file}`);
+      console.error(e);
+    }
   } else if (command === "list") {
     const linesPayload = await getLines();
     const lines = linesPayload.data.data
