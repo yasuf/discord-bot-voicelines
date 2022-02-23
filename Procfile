@@ -1,2 +1,3 @@
-bot: npm run start
-frontend: cd front && npm install && npm run build && node server.js
+bot: npm run bot
+front: npm run start
+
