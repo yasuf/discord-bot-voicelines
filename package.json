@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd front && npm install && npm run build && node server.js",
+    "start": "cd front && yarn install && yarn build && node server.js",
     "bot": "node src/index.js"
   },
   "author": "",
