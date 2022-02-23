@@ -26,7 +26,7 @@ client.on("messageCreate", async function(message) {
   let voiceClient;
 
   if (!voiceClients[memberGuildId]) {
-    console.log(memberGuildId);
+    console.log(`memberGuildId: ${memberGuildId}`);
     voiceClients[memberGuildId] = new Voice();
   }
 
