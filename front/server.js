@@ -8,5 +8,6 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.listen(443);
-console.log('Listening on port 443');
+const PORT = process.env.PORT || 5000;
+app.listen(PORT);
+console.log(`Listening on port ${PORT}`);
