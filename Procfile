@@ -1,3 +1,3 @@
 bot: npm run bot
-front: npm run start
+web: npm run start
 
