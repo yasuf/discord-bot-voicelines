@@ -49,8 +49,11 @@ client.on("messageCreate", async function(message) {
     try {
       const line = await getLineByName(file);
 
-      const fileUrl = `${process.env.LINES_API_URL}${line.data.audioFile.url}`;
+      const fileUrl = line.data.audioFile.url;
       voiceClient.play(fileUrl);
+
+      console.log(`Playing voice line: ${line.data.name}`);
+      console.log('File URL:', fileUrl);
 
       message.reply(`Playing voice line: ${line.data.name}`);
     } catch (e) {
